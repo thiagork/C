@@ -1,0 +1,60 @@
+/*
+ * Chapter 9 - Program 7 - Programming in C 
+ * Function to determine if a character is alphabetic
+ */
+ 
+#include <stdio.h>
+
+
+_Bool alphabetic(const char c);
+int countWords(const char string[]);
+
+
+int main(void)
+{
+    const char text1[] = "Well, here goes.";
+    const char text2[] = "And here we go... again.";
+    
+    printf("%s - words = %d\n", text1, countWords(text1));
+    printf("%s - words = %d\n", text2, countWords(text2));
+    
+    return 0;
+}
+
+
+_Bool alphabetic(const char c)
+{
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+int countWords(const char string[])
+{
+    int wordCount = 0;
+    _Bool lookingForWord = 1;
+    
+    for (int i = 0; string[i] != '\0'; ++i)
+    {
+        if (alphabetic(string[i]))
+        {
+            if (lookingForWord)
+            {
+                ++wordCount;
+                lookingForWord = 0;
+            }
+        }
+        else
+        {
+            lookingForWord = 1;
+        }
+    }
+    
+    return (wordCount);
+}
